@@ -60,7 +60,7 @@
 
 ---
 
-> This project exists because I needed to learn 3D Modelling and the only way I actually learn something is by building something real with it, not by simply following tutorials.
+> This project exists because I needed to learn 3D Modelling and the only way I prefer learning something is by building something real with it, not by simply following tutorials.
 >
 > One week. Zero prior CAD experience. A functional snap-fit enclosure with port cutouts, engraved logos, ventilation geometry, toleranced joints, and a deadline I set for myself.
 >
