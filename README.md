@@ -60,6 +60,14 @@
 
 ---
 
+> This project exists because I needed to learn 3D Modelling and the only way I actually learn something is by building something real with it, not by simply following tutorials.
+>
+> One week. Zero prior CAD experience. A functional snap-fit enclosure with port cutouts, engraved logos, ventilation geometry, toleranced joints, and a deadline I set for myself.
+>
+> The timer on the device was literally counting down to its own completion ;)
+
+---
+
 ## What Is This
 
 I generally build dedicated hardware devices for my own use - tools that solve specific problems in how I work and think. This is one of them.
@@ -786,8 +794,15 @@ You are free to use, modify, and distribute this project for personal or commerc
 
 **Kewal Shah**
 
-A self-taught builder working across embedded systems, software, and hardware design.
-This is V1 of an ongoing project - built in Bilaspur, Chhattisgarh, India and completed 07/05/2026 (technically in the morning of 8th May at around 3 am but I was not going to redesign case and print again, so 7th May it is ;).
+B.E. in Information Technology, self-taught builder, and someone who finds it genuinely difficult to stop once something is interesting enough.
+
+I work across embedded systems, software, cybersecurity, and hardware design — not because I planned a neat career path across all of them, but because each problem I solve tends to open three more that I cannot leave alone. Cybersecurity is where I am currently going deep - drawn to it for the same reason I am drawn to hardware: there is always something underneath the surface that most people do not look at.
+
+This project is a good example of how I learn. I needed to know Fusion 360 for the Cyberdeck case. Rather than doing tutorials, I built something real, from scratch, under self-imposed pressure, in about a week - and ended up with a fully functional snap-fit enclosure with port cutouts, engraved logos, ventilation geometry, and print tolerancing that actually works. That is the only way learning sticks for me.
+
+V1 completed 07/05/2026 - technically in the early hours of 8th May around 3am, but I was not going to redesign the case and reprint just to change a date, so 7th May it is :) (and also I genuinly couldn't think of a better name other than what this device actually does XD)
+
+V2 already planned after CyberDeck completion.
 
 <br/>
 
