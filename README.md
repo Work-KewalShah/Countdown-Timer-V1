@@ -145,13 +145,13 @@ As a side project it hit everything I needed - a real use case, materials I alre
 
 | Component | Model | Purpose |
 |---|---|---|
-| Microcontroller | ESP-WROOM-32 | Main processor, NVS storage, GPIO |
-| Display | LCD1602 Parallel - Blue Backlight | 16×2 character display |
-| Charging Module | TP4056 Type-C with overcurrent protection | LiPo battery charging and protection |
-| Battery | KP 403450 1000mAh LiPo | Power source |
-| Buttons | 6×6×8mm Tactile switches × 6 | 4 navigation + BOOT + RESET |
-| Resistors | 10kΩ × 2, 470Ω × 1 | Voltage divider (battery sense) + backlight current limit |
-| Wire | CAT5 cable strands | Internal point to point wiring |
+| Microcontroller | [ESP-WROOM-32](https://robu.in/product/esp-wroom-32-wifi-bluetooth-networking-smart-component-development-board) | Main processor, NVS storage, GPIO |
+| Display | [LCD1602 Parallel - Blue Backlight](https://robu.in/product/basic-16x2-character-lcd-white-on-blue-on-blue-5v) | 16×2 character display |
+| Charging Module | [TP4056 Type-C with Overcurrent Protection](https://robu.in/product/tp4056-1a-li-ion-lithium-battery-charging-module-with-current-protection-type-c) | LiPo battery charging and protection |
+| Battery | [KP 403450 1000mAh LiPo](https://zbotic.in/product/kp-original-403450-1000mah-3-7vsingle-cell-rechargeable-lipo-battery/) | Power source |
+| Buttons | [6×6×8mm Tactile switches × 6](https://robu.in/product/6x6x8mm-tactile-push-button-switch-pack-of-20) | 4 navigation + BOOT + RESET |
+| Resistors | [10kΩ × 2](https://robu.in/product/mf25-10k-multicomp-pro-through-hole-resistor-10-kohm-250-mw-%c2%b1-1-axial-leaded-250-v), [470Ω × 1](https://robu.in/product/470-ohm-0-25w-metal-film-resistor-pack-of-100) | Voltage divider (battery sense) + backlight current limit |
+| Wire | CAT5 cable strands 24 AWG or 0.51 mm | Internal point to point wiring |
 
 <br/>
 
