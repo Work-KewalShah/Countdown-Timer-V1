@@ -33,9 +33,9 @@
 | | |
 |:---:|:---:|
 | <img width="340" alt="Countdown Timer - Build Front" src="https://github.com/user-attachments/assets/71c1e5af-6bbc-4985-ad0b-c8554a4f16e9" /> | <img width="340" alt="Countdown Timer - Build Back" src="https://github.com/user-attachments/assets/be137510-c871-4f5e-9221-5b12efe8f925" /> |
-| Build — Front | Build — Back |
+| Build - Front | Build - Back |
 | <img width="340" alt="Countdown Timer - Front" src="https://github.com/user-attachments/assets/a9d54556-75af-4896-bd52-eff8494a49be" /> | <img width="340" alt="Countdown Timer - Back" src="https://github.com/user-attachments/assets/0d7747f0-71ac-4ce3-b670-ffec28e5c35e" /> |
-| Render — Front | Render — Back |
+| Render - Front | Render - Back |
 
 </div>
 
@@ -61,6 +61,8 @@
 ---
 
 ## What Is This
+
+I generally build dedicated hardware devices for my own use - tools that solve specific problems in how I work and think. This is one of them.
 
 I was deep into building a handheld Cyberdeck - most of the electronics and software were done, but the case design remained. I had never done 3D modelling before and needed to learn it properly with accurate dimensions, custom fits, and proper strain free joints. I needed a smaller, simpler project to learn on before tackling the Cyberdeck case with complex fixtures and fittings.
 
@@ -123,7 +125,7 @@ As a side project it hit everything I needed - a real use case, materials I alre
 - Obstacle speed increases every 5 seconds
 - OK to pause/resume, BACK to exit, score displayed bottom right
 
-### Hardware
+### Physical Controls and Ports
 - 4 navigation buttons - UP, DOWN, OK, BACK - labelled on case
 - BOOT and RESET accessible from back of case without opening
 - USB-C charging port on right face, Micro USB upload port on left face
@@ -164,6 +166,8 @@ TP4056 OUT- ──► Star Ground Junction
 ### Voltage Divider - Battery Sense
 
 Two 10kΩ resistors form a divider from OUT+ to GND. The midpoint connects to ESP32 GPIO 34 (input only, no pullup). At full charge (4.2V) the midpoint sits at 2.1V - safely within the ESP32's 3.3V ADC limit.
+
+LCD Pin 3 (V0/contrast) is tied directly to GND - no resistor needed, works correctly for this specific module at battery voltage range.
 
 ```
 OUT+ ──── R1 (10kΩ) ──── junction ──── R2 (10kΩ) ──── GND
@@ -758,7 +762,7 @@ Countdown-Timer-V1/
 ### File Notes
 
 **firmware/Countdown_Timer_V1.ino**
-Single file sketch. All libraries used - LiquidCrystal, Preferences, WiFi.h — are either built into the ESP32 board package or available through Arduino Library Manager. No external dependencies beyond the ESP32 board package itself.
+Single file sketch. All libraries used - LiquidCrystal, Preferences, WiFi.h - are either built into the ESP32 board package or available through Arduino Library Manager. No external dependencies beyond the ESP32 board package itself.
 
 **case/Countdown_Timer_V1_Case.3mf**
 Contains both the front - back halves of the case along with button fittings for front - back and the LCD and Battery Backplate. Open in Bambu Studio, Prusa Slicer, or Orca Slicer. Print both halves in PLA at the provided slicer settings. Supports needed only for the front part of the outer case, all other pieces can be printed without supports, just remember to properly orient the pieces on the plate, keep the flat part seated on the plate and clean the plate before printing with 90-99% IPA or a Liquid Dishwasher.
@@ -781,7 +785,7 @@ You are free to use, modify, and distribute this project for personal or commerc
 **Kewal Shah**
 
 A self-taught builder working across embedded systems, software, and hardware design.
-This is V1 of an ongoing project - built in Bilaspur, Chhattisgarh, India and completed 07/05/2026.
+This is V1 of an ongoing project - built in Bilaspur, Chhattisgarh, India and completed 07/05/2026 (technically in the morning of 8th May at around 3 am but I was not going to redesign case and print again, so 7th May it is ;).
 
 <br/>
 
