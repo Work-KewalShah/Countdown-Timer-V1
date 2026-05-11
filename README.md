@@ -755,6 +755,8 @@ Countdown-Timer-V1/
 │   ├── Countdown_Timer_USB_C_Cut.png
 │   └── Countdown_Timer_Micro_USB_Cut.png
 │
+├── LICENSE
+│
 └── README.md
 ```
 <br/>
