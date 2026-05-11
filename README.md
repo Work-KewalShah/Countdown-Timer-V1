@@ -588,7 +588,7 @@ Starting from zero knowledge of 3D modelling:
 - **Bambu A1 Mini** - first hands-on experience with a consumer FDM printer, understanding the relationship between slicer settings and print quality
 - **Wall thickness vs nozzle diameter** - choosing 2.0mm walls (5 perimeters at 0.4mm nozzle) for structural integrity while keeping print time reasonable
 - **Layer height tradeoff** - 0.2mm gives good surface quality on visible faces without the time cost of 0.1mm
-- **Infill selection** - gyroid rectilinear at 15% for strength without excess material in a case that takes light mechanical stress
+- **Infill selection** - gyroid rectilinear at 20% for strength without excess material in a case that takes light mechanical stress
 - **Print speed for outer walls** - slowing outer walls to 60-70mm/s to reduce ringing artifacts on the engraved text and logo
 
 <br/>
