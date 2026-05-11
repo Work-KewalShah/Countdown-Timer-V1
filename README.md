@@ -193,7 +193,7 @@ GPIO 34
 
 <br/>
 
-> For the full annotated diagram with pin tables, power connections, voltage divider breakdown and GND star junction detail — download the [PDF version](wiring/Countdown_Timer_V1_Wiring_Diagram.pdf)
+> For the full annotated diagram with pin tables, power connections, voltage divider breakdown and GND star junction detail - download the [PDF version](wiring/Countdown_Timer_V1_Wiring_Diagram.pdf)
 
 <br/>
 
@@ -322,10 +322,10 @@ Three backlight states managed by a runtime check every loop iteration. Behaviou
 
 | Condition | 1 Minute | 3 Minutes | 4 Minutes |
 |---|---|---|---|
-| Nothing running | DIM | OFF | — |
-| Only Cur.Goal running | DIM | — | OFF |
-| Pomodoro or General running | DIM | stays DIM forever | — |
-| Stopwatch running | DIM | stays DIM forever | — |
+| Nothing running | DIM | OFF | - |
+| Only Cur.Goal running | DIM | - | OFF |
+| Pomodoro or General running | DIM | stays DIM forever | - |
+| Stopwatch running | DIM | stays DIM forever | - |
 
 WiFi and Bluetooth are disabled immediately on boot. CPU is throttled to 80MHz. Combined with smart backlight this gives approximately **20-28 hours** of battery life from the 1000mAh cell depending on usage pattern.
 
@@ -342,7 +342,7 @@ WiFi and Bluetooth are disabled immediately on boot. CPU is throttled to 80MHz. 
 Each running countdown slot saves its remaining seconds to ESP32 NVS flash every 10 seconds. On reboot the firmware reads all three slots, checks for any that were running, and presents a resume prompt before the main loop starts ticking - preventing a race condition where the tick would mark slots as finished before the user could respond.
 
 ```cpp
-// Guard — never tick until targetMillis is properly reconstructed after resume
+// Guard - never tick until targetMillis is properly reconstructed after resume
 if (slots[i].targetMillis > 0 && now >= slots[i].targetMillis) {
     // slot finished
 }
@@ -796,7 +796,7 @@ You are free to use, modify, and distribute this project for personal or commerc
 
 B.E. in Information Technology, self-taught builder, and someone who finds it genuinely difficult to stop once something is interesting enough.
 
-I work across embedded systems, software, cybersecurity, and hardware design — not because I planned a neat career path across all of them, but because each problem I solve tends to open three more that I cannot leave alone. Cybersecurity is where I am currently going deep - drawn to it for the same reason I am drawn to hardware: there is always something underneath the surface that most people do not look at.
+I work across embedded systems, software, cybersecurity, and hardware design - not because I planned a neat career path across all of them, but because each problem I solve tends to open three more that I cannot leave alone. Cybersecurity is where I am currently going deep - drawn to it for the same reason I am drawn to hardware: there is always something underneath the surface that most people do not look at.
 
 This project is a good example of how I learn. I needed to know Fusion 360 for the Cyberdeck case. Rather than doing tutorials, I built something real, from scratch, under self-imposed pressure, in about a week - and ended up with a fully functional snap-fit enclosure with port cutouts, engraved logos, ventilation geometry, and print tolerancing that actually works. That is the only way learning sticks for me.
 
