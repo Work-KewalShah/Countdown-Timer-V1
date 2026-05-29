@@ -57,7 +57,6 @@
 - [License](#license)
 - [Author](#author)
 
-
 ---
 
 > This project exists because I needed to learn 3D Modelling and the only way I prefer learning something is by building something real with it, not by simply following tutorials.
@@ -117,9 +116,9 @@ As a side project it hit everything I needed - a real use case, materials I alre
 - Survives full power loss - picks up within ~10 seconds of where it left off
 
 ### Idle Behaviour
-- **2 minutes idle** → switches to fullscreen countdown of the most urgent timer
+- **2 minutes idle** - switches to fullscreen countdown of the most urgent timer
 - Stopwatch takes display priority over countdowns when running
-- If nothing is running → snake animation across the display perimeter
+- If nothing is running - snake animation across the display perimeter
 - Backlight dim logic applies to all idle screens
 
 ### Battery Indicator
@@ -129,7 +128,7 @@ As a side project it hit everything I needed - a real use case, materials I alre
 
 ### Dodge Duck Game
 - Built-in dodge game accessible from the main menu
-- Score is the amount of seconds survived
+- Score is seconds survived
 - Obstacle speed increases every 5 seconds
 - OK to pause/resume, BACK to exit, score displayed bottom right
 
@@ -146,41 +145,39 @@ As a side project it hit everything I needed - a real use case, materials I alre
 | Component | Model | Purpose |
 |---|---|---|
 | Microcontroller | [ESP-WROOM-32](https://robu.in/product/esp-wroom-32-wifi-bluetooth-networking-smart-component-development-board) | Main processor, NVS storage, GPIO |
-| Display | [LCD1602 Parallel - Blue Backlight](https://robu.in/product/basic-16x2-character-lcd-white-on-blue-on-blue-5v) | 16×2 character display |
+| Display | [LCD1602 Parallel - Blue Backlight](https://robu.in/product/basic-16x2-character-lcd-white-on-blue-on-blue-5v) | 16x2 character display |
 | Charging Module | [TP4056 Type-C with Overcurrent Protection](https://robu.in/product/tp4056-1a-li-ion-lithium-battery-charging-module-with-current-protection-type-c) | LiPo battery charging and protection |
 | Battery | [KP 403450 1000mAh LiPo](https://zbotic.in/product/kp-original-403450-1000mah-3-7vsingle-cell-rechargeable-lipo-battery/) | Power source |
-| Buttons | [6×6×8mm Tactile switches × 6](https://robu.in/product/6x6x8mm-tactile-push-button-switch-pack-of-20) | 4 navigation + BOOT + RESET |
-| Resistors | [10kΩ × 2](https://robu.in/product/mf25-10k-multicomp-pro-through-hole-resistor-10-kohm-250-mw-%c2%b1-1-axial-leaded-250-v), [470Ω × 1](https://robu.in/product/470-ohm-0-25w-metal-film-resistor-pack-of-100) | Voltage divider (battery sense) + backlight current limit |
-| Wire | CAT5 cable strands 24 AWG or 0.51 mm | Internal point to point wiring |
+| Buttons | [6x6x8mm Tactile switches x 6](https://robu.in/product/6x6x8mm-tactile-push-button-switch-pack-of-20) | 4 navigation + BOOT + RESET |
+| Resistors | [10kΩ x 2](https://robu.in/product/mf25-10k-multicomp-pro-through-hole-resistor-10-kohm-250-mw-%c2%b1-1-axial-leaded-250-v), [470Ω x 1](https://robu.in/product/470-ohm-0-25w-metal-film-resistor-pack-of-100) | Voltage divider (battery sense) + backlight current limit |
+| Wire | CAT5 cable strands 24 AWG | Internal point to point wiring |
 
 <br/>
 
 ### Power Architecture
 
-The TP4056 handles all charging via USB-C. Its OUT+ rail powers everything directly - ESP32 VIN, LCD VDD, and the top of the voltage divider. There is no separate 3.3V or 5V boost converter - the system runs at raw battery voltage (3.3V–4.2V) which the ESP32 and LCD both handle within spec.
+The TP4056 handles all charging via USB-C. Its OUT+ rail powers everything directly - ESP32 VIN, LCD VDD, and the top of the voltage divider. There is no separate 3.3V or 5V boost converter - the system runs at raw battery voltage (3.3V-4.2V) which the ESP32 and LCD both handle within spec.
 
 ```
 Battery (+) ──► TP4056 B+
 TP4056 OUT+ ──► ESP32 VIN
-──► LCD Pin 2 (VDD)
-──► Voltage Divider R1 top
+           ──► LCD Pin 2 (VDD)
+           ──► Voltage Divider R1 top
 TP4056 OUT- ──► Star Ground Junction
-──► ESP32 GND
-──► LCD Pin 1 (VSS)
-──► All button GND legs
-──► Voltage divider R2 bottom
+           ──► ESP32 GND
+           ──► LCD Pin 1 (VSS)
+           ──► All button GND legs
+           ──► Voltage divider R2 bottom
 ```
 
 ### Voltage Divider - Battery Sense
 
-Two 10kΩ resistors form a divider from OUT+ to GND. The midpoint connects to ESP32 GPIO 34 (input only, no pullup). At full charge (4.2V) the midpoint sits at 2.1V - safely within the ESP32's 3.3V ADC limit.
-
-LCD Pin 3 (V0/contrast) is tied directly to GND - no resistor needed, works correctly for this specific module at battery voltage range.
+Two 10kΩ resistors form a divider from OUT+ to GND. The midpoint connects to ESP32 GPIO 34 (input only, no pullup). At full charge (4.2V) the midpoint sits at 2.1V - safely within the ESP32's 3.3V ADC limit. LCD Pin 3 (V0/contrast) is tied directly to GND - no resistor needed, works correctly for this specific module at battery voltage range.
 
 ```
 OUT+ ──── R1 (10kΩ) ──── junction ──── R2 (10kΩ) ──── GND
-│
-GPIO 34
+                              |
+                          GPIO 34
 ```
 
 ---
@@ -203,7 +200,7 @@ GPIO 34
 |---|---|---|
 | VIN | TP4056 OUT+ | Main power input |
 | GND | TP4056 OUT- | System ground |
-| GPIO 2 | 470Ω → LCD Pin 15 (A) | Backlight PWM |
+| GPIO 2 | 470Ω - LCD Pin 15 (A) | Backlight PWM |
 | GPIO 12 | LCD Pin 6 (E) | LCD Enable |
 | GPIO 13 | LCD Pin 4 (RS) | LCD Register Select |
 | GPIO 14 | LCD Pin 11 (D4) | LCD Data bit 4 |
@@ -235,7 +232,7 @@ GPIO 34
 | Pin 12 | D5 | GPIO 27 |
 | Pin 13 | D6 | GPIO 26 |
 | Pin 14 | D7 | GPIO 25 |
-| Pin 15 | A (Anode) | 470Ω → GPIO 2 |
+| Pin 15 | A (Anode) | 470Ω - GPIO 2 |
 | Pin 16 | K (Cathode) | GND |
 
 <br/>
@@ -257,17 +254,7 @@ GPIO 34
 
 ## How It Works - Software
 
-The firmware is a state machine built in Arduino C++ running on ESP32. Every screen in the UI is a defined state - the main loop reads the current state, handles button input, updates the display, and manages all background tasks simultaneously without blocking.
-
-```cpp
-enum Screen {
-  SCR_MAIN, SCR_SLOT_MENU, SCR_SET_DAYS, SCR_SET_HOURS, SCR_SET_MINS,
-  SCR_FULLSCREEN, SCR_CONFIRM_RESUME, SCR_GAME,
-  SCR_IDLE_SNAKE, SCR_IDLE_FULLSCREEN, SCR_TIMER_MENU, SCR_TIMER_FULLSCREEN
-};
-```
-
-All three countdown slots tick independently every loop iteration. The display only redraws when something actually changes - a second ticking, a button press, a slot finishing - keeping the LCD flicker free.
+The firmware is a state machine built in Arduino C++ running on ESP32. Every screen in the UI is a defined state - the main loop reads the current state, handles button input, updates the display, and manages all background tasks simultaneously without blocking. All three countdown slots tick independently every loop iteration. The display only redraws when something actually changes - a second ticking, a button press, a slot finishing - keeping the LCD flicker free.
 
 <br/>
 
@@ -281,14 +268,6 @@ All three countdown slots tick independently every loop iteration. The display o
 
 Each slot stores its target as an absolute `millis()` timestamp. Every loop iteration computes remaining seconds from that target. Only redraws when the second value changes - no flickering.
 
-```cpp
-unsigned long newRem = (slots[i].targetMillis - now) / 1000UL;
-if (newRem != slots[i].remainingSeconds) {
-    slots[i].remainingSeconds = newRem;
-    redraw();
-}
-```
-
 <br/>
 
 ### Stopwatch
@@ -300,13 +279,6 @@ if (newRem != slots[i].remainingSeconds) {
 <br/>
 
 The stopwatch tracks elapsed time by storing a `startMillis` timestamp and accumulated `elapsedSeconds` at each pause point. On resume it sets a new `startMillis` and adds to the accumulator - no drift, no dependency on absolute time.
-
-```cpp
-unsigned long swCurrentSeconds() {
-  if (!sw.running) return sw.elapsedSeconds;
-  return sw.elapsedSeconds + (millis() - sw.startMillis) / 1000UL;
-}
-```
 
 <br/>
 
@@ -339,16 +311,7 @@ WiFi and Bluetooth are disabled immediately on boot. CPU is throttled to 80MHz. 
 
 <br/>
 
-Each running countdown slot saves its remaining seconds to ESP32 NVS flash every 10 seconds. On reboot the firmware reads all three slots, checks for any that were running, and presents a resume prompt before the main loop starts ticking - preventing a race condition where the tick would mark slots as finished before the user could respond.
-
-```cpp
-// Guard - never tick until targetMillis is properly reconstructed after resume
-if (slots[i].targetMillis > 0 && now >= slots[i].targetMillis) {
-    // slot finished
-}
-```
-
-The stopwatch does not save to NVS - a stopwatch resuming from an unknown elapsed time after power loss serves no practical purpose.
+Each running countdown slot saves its remaining seconds to ESP32 NVS flash every 10 seconds. On reboot the firmware reads all three slots, checks for any that were running, and presents a resume prompt before the main loop starts ticking - preventing a race condition where the tick would mark slots as finished before the user could respond. The stopwatch does not save to NVS - a stopwatch resuming from an unknown elapsed time after power loss serves no practical purpose.
 
 <br/>
 
@@ -367,9 +330,9 @@ The stopwatch does not save to NVS - a stopwatch resuming from an unknown elapse
 
 After 2 minutes of no interaction the device switches automatically to an idle screen. Priority order:
 
-1. **Stopwatch running** → stopwatch fullscreen
-2. **Countdown running** → fullscreen of the slot with least time remaining (most urgent)
-3. **Nothing running** → snake animation around the display perimeter
+1. **Stopwatch running** - stopwatch fullscreen
+2. **Countdown running** - fullscreen of the slot with least time remaining (most urgent)
+3. **Nothing running** - snake animation around the display perimeter
 
 The snake has a directional triangle head that rotates to face its direction of travel, a solid neck block, and small circle body dots.
 
@@ -383,15 +346,13 @@ The snake has a directional triangle head that rotates to face its direction of 
 
 <br/>
 
-Accessible from the main menu as the 5th item. A duck on the left dodges bullets coming from the right. UP and DOWN switch rows. Score is seconds survived. Speed increases every 5 seconds. A pattern system controls obstacle rows - maximum 3 consecutive same-row bullets before a forced row switch. OK pauses/resumes, BACK exits cleanly to the main menu.
-
-The game tick runs independently of button presses - bullets move on their own clock regardless of player input.
+Accessible from the main menu as the 5th item. A duck on the left dodges bullets coming from the right. UP and DOWN switch rows. Score is seconds survived. Speed increases every 5 seconds. A pattern system controls obstacle rows - maximum 3 consecutive same-row bullets before a forced row switch. OK pauses/resumes, BACK exits cleanly to the main menu. The game tick runs independently of button presses - bullets move on their own clock regardless of player input.
 
 ---
 
 ## Case Design
 
-Designed in **Autodesk Fusion 360**. Snap fit construction - no screws, no inserts. The case splits into two halves that press together and hold by friction fit tabs. Everything inside sits in dedicated pockets sized to the exact component dimensions with 0.2–0.3mm clearance for print tolerance.
+Designed in **Autodesk Fusion 360**. Snap fit construction - no screws, no inserts. The case splits into two halves that press together and hold by friction fit tabs. Everything inside sits in dedicated pockets sized to the exact component dimensions with 0.2-0.3mm clearance for print tolerance.
 
 <br/>
 
@@ -425,7 +386,7 @@ Four navigation buttons sit along the top edge of the front face with engraved l
 The two programming buttons are recessed on the back face with engraved labels. Separated from the navigation buttons so they cannot be pressed accidentally during normal use.
 
 **Ventilation**
-A dot matrix pattern covers most of the back face. Provides passive airflow around the Battery, TP4056 Charger, ESP32 and acts as the primary aesthetic feature of the back alongside the engraved logo, version number and build date.
+A dot matrix pattern covers most of the back face. Provides passive airflow around the Battery, TP4056 Charger and ESP32 - and acts as the primary aesthetic feature of the back alongside the engraved logo, version number and build date.
 
 **Port cutouts**
 
@@ -441,13 +402,14 @@ A dot matrix pattern covers most of the back face. Provides passive airflow arou
 Both ports accessible from outside the case without opening. USB-C on the right face for charging via TP4056. Micro USB on the left face for code upload to ESP32. Cutouts have 0.4mm clearance on each side for print tolerance.
 
 **Logo engraving**
-The character silhouette on the back is engraved at 0.4mm depth - exactly one nozzle width - which gives clean crisp edges at this scale. The logo is custom made and it's SVG was imported into Fusion 360 directly from Inkscape and extruded as a cut.
+The character silhouette on the back is engraved at 0.4mm depth - exactly one nozzle width - which gives clean crisp edges at this scale. The logo is custom made and its SVG was imported into Fusion 360 directly from Inkscape and extruded as a cut.
 
 <br/>
 
 ### Print Settings
 
-Print stettings can be changed depending your Filament and Printer Type
+Print settings can be changed depending on your filament and printer type.
+
 | Setting | Value |
 |---|---|
 | Printer | Bambu A1 Mini |
@@ -522,7 +484,7 @@ Since the ESP32 and BOOT button are inside the case, use the external BOOT and R
 7. Wait for upload to complete
 8. Press **RESET** once to restart the device and run the new firmware
 
-> If upload fails with an MD5 mismatch error, try a different USB cable - power-only cables have no data lines and look identical to data cables. Also try enabling Clear Flash while uploading new firmware in Tools Section and lowering upload speed to 115200 in Tools → Upload Speed.
+> If upload fails with an MD5 mismatch error, try a different USB cable - power-only cables have no data lines and look identical to data cables. Also try enabling Clear Flash while uploading new firmware in Tools and lowering upload speed to 115200 in Tools - Upload Speed.
 
 <br/>
 
@@ -551,191 +513,43 @@ prefs.begin("slot2", false); prefs.clear(); prefs.end();
 
 ## Skills Learned
 
-This project started as a side project to learn 3D modelling before tackling the Cyberdeck case. It ended up covering a much broader range of skills than expected - spanning embedded systems, hardware design, CAD, manufacturing, and systematic debugging across both software and hardware.
+This project covered a much broader range of skills than expected - embedded C++, ESP32 architecture, battery management, parallel LCD communication, CAD, 3D printing, slicing, and systematic hardware debugging.
 
-<br/>
-
-### Embedded C++ and Arduino
-Writing production-quality embedded code without an operating system. Every feature - simultaneous countdowns, button handling, display updates, NVS saves, game tick - runs in a single loop without threads or interrupts. Key concepts applied:
-- **State machines** - entire UI modelled as discrete states with clean transitions
-- **Non-blocking design** - nothing in the main loop blocks except intentional short delays, keeping all background tasks running simultaneously
-- **Debounce without blocking** - timestamp based debounce replacing naive `while` loops that would freeze execution
-- **PWM control** - backlight brightness via `ledcAttach` and `ledcWrite` on ESP32
-
-<br/>
-
-### ESP32 Architecture and IoT
-Going deeper than surface level Arduino usage into ESP32 specific features:
-- **NVS (Non-Volatile Storage)** - key-value flash storage that survives power loss, used to implement timer state persistence and resume on reboot
-- **ADC calibration** - understanding ESP32 ADC nonlinearity, using `analogReadMilliVolts()` with internal factory calibration, and building a lookup table to map voltage to battery percentage accurately
-- **Power management** - disabling WiFi and Bluetooth at runtime, throttling CPU from 240MHz to 80MHz, staged backlight control - all purely in software with measurable battery life impact
-- **Boot sequence** - understanding the ESP32 boot process, BOOT pin behaviour, flash mode entry, and NVS initialisation timing
-
-<br/>
-
-### Communication Protocols
-- **Parallel LCD - 4-bit mode** - driving an HD44780 LCD over 6 GPIO lines (RS, E, D4-D7), understanding the difference between 4-bit and 8-bit modes, why pins D0-D3 are left unconnected, and how the enable pulse timing works
-- **UART debugging** - using `Serial.begin()` and `Serial.println()` to instrument the firmware during the NVS resume bug hunt, reading boot messages from the ESP32 ROM bootloader, and isolating exactly which line of setup was crashing
-
-<br/>
-
-### Battery Management
-- **LiPo charging** - TP4056 module operation, B+/B- vs OUT+/OUT- pin functions, charge current, full charge voltage (4.2V), and low voltage cutoff behaviour
-- **Voltage divider design** - calculating resistor values to bring battery voltage within ADC safe range, understanding the current bleed tradeoff with high value resistors
-- **Discharge curve** - understanding that lithium cell discharge is not linear, and building a lookup table based on real LiPo chemistry to give accurate percentage readings across the full charge range
-- **System power architecture** - running ESP32 and LCD directly from raw battery voltage without a boost converter, understanding what voltage range each component tolerates
-
-<br/>
-
-### CAD - Fusion 360
-Starting from zero knowledge of 3D modelling:
-- **Parametric modelling** - building the case with dimension-driven sketches so wall thickness, pocket depth, and clearance values could be adjusted without rebuilding from scratch
-- **Component pocketing** - modelling precise internal pockets for each component with measured clearances for print tolerance
-- **SVG import for engraving** - converting the character silhouette PNG to SVG via Inkscape trace bitmap, importing into Fusion 360, and extruding as a 0.4mm cut for the back face logo
-- **Tolerancing** - understanding that a 28mm hole in CAD prints as roughly 27.6mm in PLA at 0.2mm layer height, and adding clearance accordingly for snap fit joints and port cutouts
-
-<br/>
-
-### 3D Printing and Slicing
-- **Bambu A1 Mini** - first hands-on experience with a consumer FDM printer, understanding the relationship between slicer settings and print quality
-- **Wall thickness vs nozzle diameter** - choosing 2.0mm walls (5 perimeters at 0.4mm nozzle) for structural integrity while keeping print time reasonable
-- **Layer height tradeoff** - 0.2mm gives good surface quality on visible faces without the time cost of 0.1mm
-- **Infill selection** - rectilinear at 20% for strength without excess material in a case that takes light mechanical stress
-- **Print speed for outer walls** - slowing outer walls to 60-70mm/s to reduce ringing artifacts on the engraved text and logo
-
-<br/>
-
-### Hardware Debugging and Systematic Problem Solving
-The most valuable skill developed - approaching hardware and firmware bugs methodically:
-- **Isolating variables** - when the display showed nothing, testing contrast, wiring, and code separately rather than changing everything at once
-- **Serial Monitor instrumentation** - adding strategic `Serial.println()` checkpoints through `setup()` to find exactly which line caused a boot crash
-- **Reading datasheet behaviour** - discovering that GPIO 34 and 35 on ESP32 do not support internal pullups by reading the technical reference, not by guessing
-- **NVS type mismatch diagnosis** - tracing a 49-day wrong resume value back to a key type mismatch between code versions through Serial Monitor output and understanding how NVS stores typed data
-- **Race condition identification** - finding that `tickAllSlots()` was marking slots finished before the resume prompt appeared because `targetMillis` was zero at boot, and fixing it with a targeted guard condition
+The full breakdown with specifics on each skill, what was learned from zero, and what surprised me most is in the [build journey document](My_Journey.md).
 
 ---
 
 ## Major Problems and Solutions
 
-A record of the most significant bugs and hardware issues encountered during the build - both for documentation and for anyone attempting something similar.
+Five significant bugs and hardware issues were encountered and resolved during this build - GPIO silent pullup failure, battery ADC double correction, NVS type mismatch producing garbage resume values, a boot sequence race condition marking timers as finished before the resume prompt appeared, and an infinite blocking loop freezing the device on button press.
 
-<br/>
-
-### 1. GPIO 35 Silent INPUT_PULLUP Failure
-
-**Problem**
-The START button was wired to GPIO 35 and configured with `INPUT_PULLUP` in code. The button behaved erratically - random ghost presses, no response, or stuck states. No compile error, no warning, nothing obvious.
-
-**Root Cause**
-GPIO 34 and 35 on ESP32-WROOM are input-only pins that do not support internal pull-up resistors. The `pinMode(35, INPUT_PULLUP)` call silently does nothing. The pin floated at an undefined voltage, reading random HIGH and LOW states with no button pressed.
-
-**Fix**
-Moved the button to GPIO 18 which supports INPUT_PULLUP natively. No external resistor needed.
-
-**Lesson**
-Always cross-reference the ESP32 technical reference for pin capabilities before assigning GPIO. Input-only pins and their restrictions are not obvious from the board silkscreen.
-
-<br/>
-
-### 2. Battery Always Showing 100%
-
-**Problem**
-After implementing the battery percentage display, the reading showed 100% at all times regardless of actual charge level. Restarting did not help.
-
-**Root Cause**
-A correction factor of 1.06 was applied to the ADC reading on top of `analogReadMilliVolts()` which already applies ESP32 internal factory calibration. The double correction pushed every reading above the 4.20V top of the lookup table, clamping to 100% permanently.
-
-**Fix**
-Removed the correction factor entirely. Lowered the top table entry from 4.20V to 4.10V - the ESP32 ADC never reads true 4.20V even at full charge due to its hardware compression at the top of its range. Added 5-reading averaging to reduce noise.
-
-**Lesson**
-`analogReadMilliVolts()` already compensates for ADC nonlinearity using factory calibration data burned into the chip. Adding another correction factor on top is double counting.
-
-<br/>
-
-### 3. NVS Type Mismatch - 49 Days on Resume
-
-**Problem**
-After implementing NVS save and resume, restarting the device while a timer was running showed the resume prompt correctly but resumed to approximately 49 days remaining regardless of actual remaining time.
-
-**Root Cause**
-49 days is approximately 4,294,964 seconds - close to the maximum value of an unsigned long. Earlier versions of the code had stored `remainingSeconds` under a different NVS key type (signed Long). When the new code read it with `getULong`, the type mismatch caused the NVS library to return garbage data near the unsigned long maximum.
-
-**Fix**
-One-time NVS wipe using `prefs.clear()` on all three slot namespaces to flush the corrupted typed data. After the wipe, all values were written and read with consistent types from scratch. Importantly, the wipe code was removed before the second upload - leaving it in caused everything to reset on every boot.
-
-**Lesson**
-NVS stores data with type metadata. Changing the type of a key between firmware versions without clearing the namespace first causes silent corruption on read. When changing NVS key types always clear the namespace or change the key name.
-
-<br/>
-
-### 4. DONE Alert Before Resume Prompt
-
-**Problem**
-On reboot with a running timer saved in NVS, the DONE alert appeared immediately before the resume prompt was ever shown. The timer was being marked finished the moment the device booted.
-
-**Root Cause**
-`tickAllSlots()` ran in `loop()` on the very first iteration after setup. Running slots loaded from NVS had `targetMillis = 0` because it had not been reconstructed yet - `resumeRunningSlots()` only runs after the user confirms the prompt. Since `millis()` is always greater than 0, the condition `now >= slots[i].targetMillis` evaluated true instantly for every running slot, marking all of them finished before the user could respond.
-
-**Fix**
-Two guards added. First, `slots[i].targetMillis > 0` added to the finished check inside `tickAllSlots()` so a slot with uninitialized targetMillis can never be marked finished. Second, `currentScreen != SCR_CONFIRM_RESUME` added to the `tickAllSlots()` call condition in `loop()` so ticking is completely suspended while the resume prompt is visible.
-
-**Lesson**
-Boot sequence timing matters. Any background task that modifies state needs to be aware of what has and has not been initialised at the point it first runs.
-
-<br/>
-
-### 5. Buttons Freezing the Device
-
-**Problem**
-Occasionally pressing a button caused the entire device to freeze - display stuck, no response to any input, required a full battery disconnect to recover.
-
-**Root Cause**
-Three contributing causes found. Primary: `waitRelease()` was an infinite `while(digitalRead(pin) == LOW)` loop with no timeout. If a button contact stuck even momentarily due to mechanical bounce or a slightly sticky switch, the entire program froze indefinitely - no countdown ticks, no display updates, no other buttons responded. Secondary: `handleDodge()` was called twice in `loop()` - once from the button handler switch case and once unconditionally at the bottom - causing the two calls to interfere with each other during game state. Third: no hardware watchdog meant a frozen loop had no automatic recovery path.
-
-**Fix**
-Added a 2-second timeout to `waitRelease()` - if the pin does not go HIGH within 2 seconds the loop exits regardless. Removed the duplicate `handleDodge()` call, separating the game tick into its own independent block. The watchdog was attempted but removed after the ESP32 core 3.x API change caused boot crashes - the `waitRelease()` timeout was sufficient to resolve the freezing in practice.
-
-**Lesson**
-Never use infinite blocking loops in embedded systems without a timeout escape. Any loop that waits for external hardware input - a button, a sensor, a peripheral - must have a maximum wait time or the program becomes unrecoverable without a hardware reset.
+Full root cause analysis, fixes and lessons for each in [My_Journey.md](My_Journey.md).
 
 ---
 
 ## V2 Planned Improvements
 
-V1 is complete and functional. These are the improvements planned for the next revision - none of them require changes to the core firmware logic, they are additive.
+V1 is complete and functional. These are the improvements planned for the next revision.
 
 <br/>
 
 ### Hardware Changes
 
 **Passive Buzzer - Audio Alerts**
-The most impactful missing feature. A passive buzzer on any free GPIO pin would let countdown completions make noise - a beep pattern when a slot hits zero. Currently the only alert is a screen notification which is easy to miss if the device is face down or in a bag. A buzzer costs under ₹20 and needs one GPIO and one resistor.
+A passive buzzer on any free GPIO pin for countdown completion alerts. Currently the only alert is a screen notification which is easy to miss if the device is face down or in a bag.
 
 **Screen Tilt - Better Desk Viewing Angle**
-The current front face is flat - the LCD sits perpendicular to the desk surface. Tilting the screen pocket back 10-15 degrees in Fusion 360 would make the display much more readable when the device is sitting on a desk in front of you without picking it up. A small change in CAD with a significant improvement in daily usability.
+Tilting the screen pocket back 10-15 degrees in Fusion 360 for better readability when the device sits on a desk without picking it up.
 
 **Power Toggle Switch**
-Currently the only way to fully power off the device is to disconnect the battery - there is no hardware power switch. A small slide or toggle switch inline on the battery positive wire between the battery and TP4056 OUT+ would allow clean power off and provide a recovery path if the device ever crashes hard enough that even the RESET button does not respond. No firmware changes needed.
+A slide or toggle switch inline on the battery positive wire for clean power off without disconnecting the battery physically.
 
 <br/>
 
 ### Software Changes
 
 **DS3231 RTC Module - Accurate Power-Off Time Tracking**
-Currently the device uses Option A resume - treat power-off as a pause and resume from the last saved point. This means time that passed while the device was off is not counted against the countdown. A DS3231 real time clock module connected via I2C would let the firmware calculate exactly how much time passed during power-off and subtract it from remaining seconds on resume - making the countdown accurate across reboots. The DS3231 has its own coin cell battery and keeps time independently of the main battery.
-
-<br/>
-
-### V1 vs V2 Comparison
-
-| Feature | V1 | V2 |
-|---|---|---|
-| Audio alerts | None | Passive buzzer |
-| Screen angle | Flat - perpendicular | Tilted 10-15° backward |
-| Power off | Disconnect battery | Hardware toggle switch |
-| Resume accuracy | Last saved point (±10s) | Exact elapsed time via RTC |
-| Case | Snap fit, no screws | Revised for tilt + switch cutout |
+Currently the device treats power-off as a pause and resumes from the last saved point. A DS3231 RTC module connected via I2C would calculate exact elapsed time during power-off and subtract it from remaining seconds on resume - making the countdown accurate across reboots.
 
 ---
 
@@ -763,22 +577,20 @@ Countdown-Timer-V1/
 │   ├── Countdown_Timer_USB_C_Cut.png
 │   └── Countdown_Timer_Micro_USB_Cut.png
 │
+├── My_Journey.md
 ├── LICENSE
-│
 └── README.md
 ```
+
 <br/>
 
 ### File Notes
 
-**firmware/Countdown_Timer_V1.ino**
-Single file sketch. All libraries used - LiquidCrystal, Preferences, WiFi.h - are either built into the ESP32 board package or available through Arduino Library Manager. No external dependencies beyond the ESP32 board package itself.
+**firmware/Countdown_Timer_V1.ino** - Single file sketch, no external dependencies beyond the ESP32 board package and LiquidCrystal library.
 
-**case/Countdown_Timer_V1_Case.3mf**
-Contains both the front - back halves of the case along with button fittings for front - back and the LCD and Battery Backplate. Open in Bambu Studio, Prusa Slicer, or Orca Slicer. Print both halves in PLA at the provided slicer settings. Supports needed only for the front part of the outer case, all other pieces can be printed without supports, just remember to properly orient the pieces on the plate, keep the flat part seated on the plate and clean the plate before printing with 90-99% IPA or a Liquid Dishwasher.
+**case/Countdown_Timer_V1_Case.3mf** - Both case halves and all internal fittings. Supports needed only for the front outer piece. Keep flat faces on the plate and clean the bed with IPA before printing.
 
-**wiring/Countdown_Timer_V1_Wiring_Diagram.pdf**
-The PDF has the full annotated reference - power connections table, voltage divider breakdown, LCD pin table, GND star junction explanation, and wire colour suggestions. Use this when building rather than the PNG so that you can properly zoom in.
+**wiring/Countdown_Timer_V1_Wiring_Diagram.pdf** - Full annotated reference with pin tables and connection detail. Use this over the PNG for proper zoom.
 
 ---
 
@@ -800,9 +612,9 @@ I work across embedded systems, software, cybersecurity, and hardware design - n
 
 This project is a good example of how I learn. I needed to know Fusion 360 for the Cyberdeck case. Rather than doing tutorials, I built something real, from scratch, under self-imposed pressure, in about a week - and ended up with a fully functional snap-fit enclosure with port cutouts, engraved logos, ventilation geometry, and print tolerancing that actually works. That is the only way learning sticks for me.
 
-V1 completed 07/05/2026 - technically in the early hours of 8th May around 3am, but I was not going to redesign the case and reprint just to change a date, so 7th May it is :) (and also I genuinly couldn't think of a better name other than what this device actually does XD)
+V1 completed 07/05/2026 - technically in the early hours of 8th May around 3am, but I was not going to redesign the case and reprint just to change a date, so 7th May it is :)
 
-V2 already planned after CyberDeck completion.
+V2 after Cyberdeck completion. [Read the full build journey](My_Journey.md).
 
 <br/>
 
