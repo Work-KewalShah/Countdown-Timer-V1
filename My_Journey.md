@@ -185,6 +185,6 @@ No one can build what you would build. That is the whole point.
 
 ---
 
-*Kewal Shah*
-*V1 - 07/05/2026 -*
+*Kewal Shah* <br>
+*V1 - 07/05/2026* <br>
 *Cyberdeck - on the way*
