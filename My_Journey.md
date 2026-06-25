@@ -61,6 +61,59 @@ Sometimes the most productive thing you can do is stop.
 
 ---
 
+## Learning CAD - The Door Handle
+
+Before I could touch the Countdown Timer case, I needed to actually learn Fusion 360. Not from tutorials - from a real problem.
+
+The kitchen closet door handle had broken. I decided to model and print a replacement. Simple enough to be achievable in a day or two, complex enough to actually teach me something. Curves, extrudes, fillets, real-world dimensions - everything I would need for the case.
+
+I did not have a digital caliper. I measured the original handle with a manual Vernier caliper and drew up the dimensions in Canva - because I know Canva well and it was the fastest way to get a clean dimensional reference I could work from.
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="Original Door Handle" src="https://github.com/user-attachments/assets/3da1f004-a17c-4542-a0ae-5c5c326d6c70" /> | <img width="320" alt="Canva Screen Door Handel Dimensions" src="https://github.com/user-attachments/assets/3ec76139-0a62-4785-bf2c-c2faffc5bfa2" /> |
+| Reference handle | Dimensions mapped in Canva |
+
+</div>
+
+Then I opened Fusion 360 and started modelling. Getting the curves right, understanding how constraints work, building it so that changing one dimension does not collapse the whole sketch - none of it came easily at first. But the door handle was a concrete thing I could hold and measure and compare against. That made the learning stick in a way that a tutorial exercise never would have.
+
+<div align="center">
+  <img width="700" alt="Fusion Screen Door Handle Final" src="https://github.com/user-attachments/assets/6253c0ef-e08c-4347-9eb0-f46bdc768292" />
+  <br/>
+  <em>Final door handle model in Fusion 360 - timeline and browser visible</em>
+</div>
+
+<br/>
+
+Then printed it.
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="3D Printing Door Handle" src="https://github.com/user-attachments/assets/b24e810e-343e-4305-a782-62a7d0a8acf0" /> | <img width="320" alt="3D Printer Printing Door Handle Gif" src="https://github.com/user-attachments/assets/ff5fede0-7169-42f1-819f-4df8a29968fa" /> |
+| Printing the handle | Print in progress |
+
+</div>
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="3D Printed Door Handle in Hand" src="https://github.com/user-attachments/assets/132e496e-bf9b-402b-97cd-8d6e4acb5016" /> | <img width="320" alt="3D Printed Door Handle Fitted" src="https://github.com/user-attachments/assets/017566fc-0cf7-40e3-a21e-1ae550ca043c" /> |
+| Final Printed handle | Fitted in the closet |
+
+</div>
+
+It fit. It worked. The closet door opens and closes on a handle I designed and printed myself.
+
+More importantly - I now knew enough Fusion 360 to start the case.
+
+---
+
 ## The Build - Hardware
 
 The hardware side of this build was the part I was most comfortable with coming in, and even then it surprised me.
@@ -70,6 +123,28 @@ I started the way I always start - wiring diagram first. Understanding how power
 The ESP32 was new territory. I had never touched Arduino IDE, never flashed a microcontroller this way, never written code for a device with no operating system underneath it. Everything had to be thought about differently - no threads, no background processes, just a single loop running over and over, handling everything simultaneously without blocking.
 
 The wiring itself came together using CAT5 cable strands - solid core, thin, exactly right for point to point work inside a small case. All ground connections meeting at a single star junction. Power flowing from the TP4056 directly to everything. Simple and clean.
+
+At some point during the build I had the main component stack assembled and seated - ESP32, TP4056, LCD, battery all stacked and wired before the case was finalised. This is what the inside looked like before it was closed up.
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="Middle Component Stack Main" src="https://github.com/user-attachments/assets/10098959-5085-4431-9a47-fd50ae01d1d8" /> | <img width="320" alt="Middle Component Stack Port View 1" src="https://github.com/user-attachments/assets/c229766f-aa54-4310-84ff-02896ac96418" /> |
+| Component stack - main view | Port side view 1 |
+| <img width="320" alt="Middle Component Stack Port View 2" src="https://github.com/user-attachments/assets/35564713-1302-4086-a487-36556b79fced" /> | |
+| Port side view 2 | |
+
+</div>
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="Middle Component Stack Gif 1" src="https://github.com/user-attachments/assets/96b213a7-b781-4856-a4c0-7d099c86b798" /> | <img width="320" alt="Middle Component Stack Gif 2" src="https://github.com/user-attachments/assets/6e1a4a55-ca9e-45cc-b288-d9c20a4a42fb" /> |
+| Component stack - with battery plate | Component stack - witout battery plate |
+
+</div>
 
 Claude helped significantly with the firmware. The state machine architecture, the NVS save and resume logic, the backlight management, the game. I would describe what I wanted, we would work through it together, and I would push back when something was wrong - which happened more than once. The custom LCD characters, some of the menu navigation logic, certain game behaviours - those needed correction and iteration the same way the hardware did. The collaboration worked because I knew what I wanted the device to do, even when I did not know exactly how to make it do that.
 
@@ -81,15 +156,27 @@ Without that collaboration I am certain I would have spent significantly longer 
 
 This is where the real learning happened.
 
-I opened Fusion 360 with no prior experience. I watched enough to understand the basic sketch and extrude workflow. Then I started building.
+The door handle had given me the basics. Now the case was a different challenge - internal pockets, port cutouts, button holes, snap fit joints, tolerancing everything for real-world print dimensions. Much more complex. Much more at stake because everything needed to fit together at the end.
 
-The first few days of CAD were humbling. I had assumed it would not be that difficult. I was wrong. Getting dimensions accurate, understanding how constraints work, how to build parametrically so that changing one value does not break everything else - none of it was intuitive at first. It took time and repetition and a lot of undoing things I had just done.
+<div align="center">
+  <img width="700" alt="Fusion Screen Countdown Timer Final" src="https://github.com/user-attachments/assets/114f7f2e-fbd5-40af-995a-bb1b92555f64" />
+  <br/>
+  <em>Final Countdown Timer V1 case in Fusion 360</em>
+</div>
 
-But it came. Slowly at first, then faster.
+<br/>
 
 The case design went through more iterations than I initially expected. Every print revealed something that needed changing. The LCD cutout was too tight. The port openings were slightly off. The button holes needed more clearance. The support columns inside were the wrong height. Each iteration meant printing, fitting, identifying the problem, going back to Fusion, changing the dimension, printing again.
 
-I have a box. It is sitting on my desk right now. It is full of every failed and partial print from this build - every wrong version of every part. Every piece of PLA that taught me something. That box is probably the most honest representation of what this build actually looked like from the inside.
+I have two boxes. They are sitting on my desk. They are full of every failed and partial print from this build - every wrong version of every part. Every piece of PLA that taught me something. Those boxes are probably the most honest representation of what this build actually looked like from the inside.
+
+<div align="center">
+  <img width="700" alt="Prototype Prints Filled Box" src="https://github.com/user-attachments/assets/b897ad51-a189-4ec0-a617-74c15907f8dd" />
+  <br/>
+  <em>Every failed print. Every lesson.</em>
+</div>
+
+<br/>
 
 One of those iterations taught me something I did not expect. I had designed circular columns inside the case to hold the LCD and the LCD backplate in position. On one fitting attempt, one of the columns broke. I looked at it for a moment and thought - what if I just remove it entirely? The LCD was fitting tightly enough without it. The column was gone in the next version and the fit was actually cleaner. Sometimes the constraint you designed around is not necessary.
 
@@ -136,6 +223,19 @@ The last time I felt that specific kind of pride was three or four years earlier
 This was different. This was just me, a box of failed prints, a reel of CAT5 wire, and something that existed now that did not exist a week ago.
 
 Something of my own. A single piece in the world. Nothing else exists like it anywhere. Not in any store, not on any shelf, not in anyone else's hands. Just mine.
+
+These photos were taken at 2:38am on 8th May 2026. The soldering table still visible in the background. The timestamp is in the image.
+
+<div align="center">
+
+| | |
+|:---:|:---:|
+| <img width="320" alt="Final Countdown Build Front" src="https://github.com/user-attachments/assets/f946f752-0dcb-4ec3-b2cf-5a6449460093" /> | <img width="320" alt="Final Countdown Build Back" src="https://github.com/user-attachments/assets/a8dc9a0a-c875-449a-b073-d06f51445090" /> |
+| Front - 2:38am, 08/05/2026 | Back - 2:38am, 08/05/2026 |
+| <img width="320" alt="Final Countdown Build Port Cutout USB C" src="https://github.com/user-attachments/assets/06987277-e1b2-4024-8c9d-bc626ed8efbb" /> | <img width="320" alt="Final Countdown Build Port Cutout Micro USB" src="https://github.com/user-attachments/assets/ab74885f-ffdb-486a-a6f9-8ffc741603e9" /> |
+| USB-C port cutout | Micro USB port cutout |
+
+</div>
 
 I went to sleep.
 
